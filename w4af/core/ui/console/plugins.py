@@ -47,11 +47,7 @@ class pluginsMenu(menu):
 
         for t in types:
             self.addChild(t, pluginsTypeMenu)
-#            self._help.add_help_entry(t, "List %s plugins" % t, 'plugins')
         self.__loadPluginTypesHelp(types)
-
-#        self._help.add_help_entry('list', "List plugins by their type", 'commands')
-#        self._help.add_help_entry('config', "Config plugins (same as <type> config>)", 'commands')
 
     def __loadPluginTypesHelp(self, types):
         vars = {}
@@ -80,14 +76,6 @@ class pluginsMenu(menu):
             return self._cmd_list(tokens)
         return menu.execute(self, tokens)
 
-#    def _cmd_config(self, params):
-#        try:
-#            type = params[0]
-#            subMenu = self._children[type]
-#        except:
-#            self._cmd_help(['config'])
-#        else:
-#            subMenu._list(params[1:])
     def _cmd_list(self, params):
         try:
             type = params[0]
@@ -147,7 +135,6 @@ class pluginsTypeMenu(menu):
     def execute(self, tokens):
         if len(tokens) > 0:
             command, params = tokens[0], tokens[1:]
-            #print "command: " + command + "; " + str(self.get_commands())
             if command in self.get_commands():
                 return menu.execute(self, tokens)
             else:
@@ -223,7 +210,6 @@ class pluginsTypeMenu(menu):
         return suggest([*self._plugins.keys()], part)
 
     def _list(self, params):
-        #print 'list : ' + str(params)
         filter = len(params) > 0 and params[0] or 'all'
 
         all = [*self._plugins.keys()]
